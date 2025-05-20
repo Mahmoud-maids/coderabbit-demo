@@ -7,6 +7,8 @@ import com.test.testing.entity.TesterLog;
 import com.test.testing.repository.TesterLogRepository;
 import com.test.testing.repository.TesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,5 +41,9 @@ public class TesterService {
 
     public List<Tester> getTesters() {
         return testerRepository.findWithSearch(null);
+    }
+
+    public Page<TesterDTO> getTestersWithPagination(Pageable pageable) {
+        return testerRepository.findAllTestersWithPagination(pageable);
     }
 }

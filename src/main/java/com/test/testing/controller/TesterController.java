@@ -5,6 +5,8 @@ import com.test.testing.dto.TesterLogDTO;
 import com.test.testing.dto.NumbersDTO;
 import com.test.testing.service.TesterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +38,16 @@ public class TesterController {
     public ResponseEntity<?> getTesters() {
         return ResponseEntity.ok(testerService.getTesters());
     }
+
+/**
+ * Retrieves a paginated list of testers
+ * @param pageable the pagination information
+ * @return a page of tester DTOs
+ */
+ @GetMapping("/paginated")
+ public ResponseEntity<Page<TesterDTO>> getTestersWithPagination(Pageable pageable) {
+     return ResponseEntity.ok(testerService.getTestersWithPagination(pageable));
+ }
 
     @GetMapping("/numbers/params")
     public ResponseEntity<Map<String, List<String>>> getNumbersWithParams(
